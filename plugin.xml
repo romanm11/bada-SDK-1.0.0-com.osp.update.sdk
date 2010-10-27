@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <actionSet
+               id="com.osp.update.sdk.updateActionSet">
+         </actionSet>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="com.osp.update.sdk.updateActionSet"
+            label="Update ActionSet"
+            visible="true">
+         <menu
+               id="com.osp.update.sdk.updateMenu"
+               label="bada"
+               path="additions">
+            <groupMarker
+                  name="content">
+            </groupMarker>
+            <separator
+                  name="additions">
+            </separator>
+         </menu>
+         <action
+               class="com.osp.update.sdk.UpdateBadaSdkAction"
+               id="com.osp.update.sdk.updateBadaSdk"
+               label="Update bada SDK"
+               menubarPath="help/end"
+               style="push"
+               tooltip="Update bada SDK">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.osp.update.sdk.UpdateStartUp"></startup>
+   </extension>
+
+</plugin>
