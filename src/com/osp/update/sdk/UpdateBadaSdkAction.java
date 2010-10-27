@@ -28,9 +28,9 @@ public class UpdateBadaSdkAction implements IWorkbenchWindowActionDelegate {
     
     public List<FileInformation> getDownloadList() throws Exception {
         String remoteLocation = REMOTE_URL + "/" + UPDATE_FILE;
-        String localLocation = getBadaSdkRoot() + "\\" + UPDATE_FILE;
+        String localLocation = getBadaSdkRoot() + java.io.File.separatorChar + UPDATE_FILE;
 
-        //¼³Ä¡µÈ Á¤º¸¸¦ ÀÐ´Â´Ù.
+        //ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
         File localFile = new File(localLocation);
         
         UpdateInfo localUpdateInfo = null;
@@ -55,11 +55,11 @@ public class UpdateBadaSdkAction implements IWorkbenchWindowActionDelegate {
             return null;            
         }
         
-        //¿ø°ÝÁöÀÇ Á¤º¸¸¦ ÀÐ´Â´Ù.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
         UpdateInfo remoteUpdateInfo = new UpdateInfo(new URL(remoteLocation));
         remoteUpdateInfo.execute();
             
-        //´Ù¿î·Îµå ¸ñ·ÏÀ» ¸¸µç´Ù.
+        //ï¿½Ù¿ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
         List<FileInformation> downloadFileInformation = new LinkedList<FileInformation>();
         
         int index = 0;
@@ -67,7 +67,7 @@ public class UpdateBadaSdkAction implements IWorkbenchWindowActionDelegate {
         boolean found = false;
         
         for (; index < sdkSize; index++) {
-            //·ÎÄÃÀÇ ¹öÀü°ú ¿ø°ÝÁöÀÇ ¹öÁ¯À» ºñ±³ÇÑ´Ù. Ã£À» ¶§±îÁö´Â ¾Æ¹«·± Çàµ¿À» ÇÏÁö ¾Ê´Â´Ù.
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½. Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½ï¿½ ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
             if (localFileInformation != null && found == false) {
                 if (remoteUpdateInfo.getSdkVersion(index).equals(localFileInformation.getProperty("VER")) == false)
                     continue;
@@ -75,8 +75,8 @@ public class UpdateBadaSdkAction implements IWorkbenchWindowActionDelegate {
                 found = true;
             }
             
-            //·ÎÄÃ¿¡ ¹öÁ¯ÀÌ ÀÖÀ» °æ¿ì, °°Àº ¹öÁ¯À» Ã£Áö ¸øÇÏ¸é ÀÌÂÊ¿¡ µé¾î¿Ã ¼ö ¾ø´Ù.
-            //UpdateÁ¤º¸´Â ¹öÀü ¼ø¼­µÇ·Î ¼³Ä¡ µÇ¹Ç·Î
+            //ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½.
+            //Updateï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½Ä¡ ï¿½Ç¹Ç·ï¿½
             List<FileInformation> fileInformationList = remoteUpdateInfo.getSdk(index);
             
             int subIndex = 0;
@@ -85,26 +85,26 @@ public class UpdateBadaSdkAction implements IWorkbenchWindowActionDelegate {
             for (; subIndex < fileSize; subIndex++) {
                 FileInformation fileInformation = fileInformationList.get(subIndex);
             
-                //ÇöÀç ¼³Ä¡µÈ ¹öÀü°ú µ¿ÀÏÇÑ ¹öÀüÀÏ °æ¿ì
+                //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                 if (localFileInformation != null &&
                     localFileInformation.getProperty("VER").equals(fileInformation.getProperty("VER")) == true
                 ) {
-                    //ÀÎ½ºÅç º»Àº ¼³Ä¡ÇÏÁö ¾Ê´Â´Ù.
+                    //ï¿½Î½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
                     if (fileInformation.getProperty("Type").equals("patch") == false)
                         continue;
                     
-                    //ÇöÀç ¼³Ä¡µÈ °ÍÀÌ patchÀÌ°í, ÀÌ¸§ÀÌ °°´Ù¸é ¼³Ä¡ÇÏÁö ¾Ê´Â´Ù.
+                    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ patchï¿½Ì°ï¿½, ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
                     if (localFileInformation.getProperty("Type").equals("patch") == true && 
                         fileInformation.getProperty("Name").equals(localFileInformation.getProperty("Name")) == true
                     ) 
                         continue;
                     
-                    //patchÀÌ°í, ÇöÀç ¼³Ä¡µÈ °Í SDKÀÇ ÀÌ¸§ÀÌ ´Ù¸¥ °æ¿ì, Update¿¡ µî·ÏÇÑ´Ù.
+                    //patchï¿½Ì°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ SDKï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½, Updateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
                     downloadFileInformation.add(fileInformation);
                     continue;
                 }
                     
-                //ÇöÀç ¹öÀü È¤Àº ¼³Ä¡µÈ °ÍÀÌ ¾ø´Â °æ¿ì, ÀÎ½ºÅç¸¸À» Çã¶ôÇÑ´Ù.
+                //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½Î½ï¿½ï¿½ç¸¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
                 if (fileInformation.getProperty("Type").equals("install") == true) {
                     downloadFileInformation.add(fileInformation);
                 }                        
@@ -133,7 +133,7 @@ public class UpdateBadaSdkAction implements IWorkbenchWindowActionDelegate {
         if (window == null)
             return;
         
-        //¼³Ä¡ÇÒ ÆÄÀÏ ¸ñ·ÏÀ» °¡Á®¿Â´Ù.
+        //ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
         List<FileInformation> fileInformationList = null;
         Shell shell = window.getShell();
         
@@ -141,11 +141,11 @@ public class UpdateBadaSdkAction implements IWorkbenchWindowActionDelegate {
             fileInformationList = getDownloadList();
         }
         catch (Exception e) {
-            //MODIFIED 2010.05.06; Àü¼ö¿Ï; ³×Æ®¿÷Å© ¿¡·¯°¡ ¹ß»ýÇßÀ» °æ¿ì, ¿À·ù¸¦ ¾Ë¸°´Ù. 
-            //  ¿äÃ»¹æ¹ý: Email
-            //  ¿äÃ»ÀÚ: ±èÁøÈ¯ Ã¥ÀÓ
-            //  ¼ö½ÅÀÏÀÚ: 2010.05.06
-            //  ¸ÞÀÏÁ¦¸ñ: [±Þ] ¼öÁ¤¿äÃ» - 2-2¹ø³»¿ë
+            //MODIFIED 2010.05.06; ï¿½ï¿½ï¿½ï¿½ï¿½; ï¿½ï¿½Æ®ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½. 
+            //  ï¿½ï¿½Ã»ï¿½ï¿½ï¿½: Email
+            //  ï¿½ï¿½Ã»ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½È¯ Ã¥ï¿½ï¿½
+            //  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: 2010.05.06
+            //  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: [ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã» - 2-2ï¿½ï¿½ï¿½
         	if (startUp == false) {
         		MessageDialog.openError(
         				shell, 
@@ -158,17 +158,17 @@ public class UpdateBadaSdkAction implements IWorkbenchWindowActionDelegate {
         }
         
         if (fileInformationList == null || fileInformationList.size() == 0) {
-            //MODIFIED 2010.05.06; Àü¼ö¿Ï; UpdateÇÒ °ÍÀÌ ¾ø´Â °æ¿ì, Á¤º¸¸¦ ¾Ë¸°´Ù. 
-            //  ¿äÃ»¹æ¹ý: Email
-            //  ¿äÃ»ÀÚ: ±èÁøÈ¯ Ã¥ÀÓ
-            //  ¼ö½ÅÀÏÀÚ: 2010.05.06
-            //  ¸ÞÀÏÁ¦¸ñ: [±Þ] ¼öÁ¤¿äÃ» - 2-1¹ø³»¿ë
+            //MODIFIED 2010.05.06; ï¿½ï¿½ï¿½ï¿½ï¿½; Updateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½. 
+            //  ï¿½ï¿½Ã»ï¿½ï¿½ï¿½: Email
+            //  ï¿½ï¿½Ã»ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½È¯ Ã¥ï¿½ï¿½
+            //  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: 2010.05.06
+            //  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: [ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã» - 2-1ï¿½ï¿½ï¿½
             if (startUp == false && UpdateFileFlag == true) {
                 MessageDialog.openInformation(shell, "Information", "There is nothing to update.");
                 return;
             }
         
-            //ÀÚµ¿À¸·Î ½ÃÀÛÇÒ °æ¿ì(bada IDE°¡ ½ÃÀÛÇßÀ» °æ¿ì)¿¡´Â Á¤º¸¸¦ º¸¿©ÁÖÁö ¾Ê´Â´Ù. ¸Þ´º¸¦ ¼±ÅÃÇßÀ» ¶§ º¸¿©ÁØ´Ù.
+            //ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(bada IDEï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½. ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
             startUp =false;
             return;
         }
@@ -176,11 +176,11 @@ public class UpdateBadaSdkAction implements IWorkbenchWindowActionDelegate {
         if (MessageDialog.openConfirm(shell, "bada SDK", "Updates are available for bada SDK. Do you want to install them?") == false)
             return;
 
-        //ÆäÀÌÁö¸¦ »ý¼ºÇÑ´Ù.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
         UpdateBadaSdkWizardPage wizardPage = new UpdateBadaSdkWizardPage(UpdateBadaSdkWizardPage.PAGE_NAME);
         wizardPage.setFileInformationList(fileInformationList);
         
-        //À§Àúµå¸¦ »ý¼ºÇÑ´Ù.
+        //ï¿½ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½Ñ´ï¿½.
         WizardDialog dialog = new WizardDialog(shell,  new UpdateBadaSdkWizard(wizardPage));
         dialog.open();
     }
@@ -196,7 +196,7 @@ public class UpdateBadaSdkAction implements IWorkbenchWindowActionDelegate {
 		{
 			String sdkRoot = new Path (Platform.getInstallLocation().getURL().getPath()).removeLastSegments(1).toOSString();
 			
-			if( sdkRoot.endsWith("\\")) sdkRoot = sdkRoot.substring(0, sdkRoot.length()-1);
+			if( sdkRoot.endsWith(java.io.File.separator)) sdkRoot = sdkRoot.substring(0, sdkRoot.length()-1);
 			
 			return sdkRoot;
 			

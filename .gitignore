@@ -1,1 +1,7 @@
 bin
+/build.xml
+/com.osp.update.sdk_*.jar
+/javaCompiler...args
+/@dot
+/@dot.log
+/bin
